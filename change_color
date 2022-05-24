@@ -1,0 +1,157 @@
+#!/usr/local/bin/python3
+import os
+
+path_dir='/home/flychen59/iVHChange/gtFine/val/'
+
+out_dir='/home/flychen59/ivh/gtFine/val/'
+
+from PIL import Image
+import PIL.ImageOps
+import numpy as np
+
+import cv2
+
+
+for i in os.listdir(path_dir):
+    path_files=path_dir+i
+    print(path_files)
+    Image = cv2.imread(path_files)
+    Image2 = np.array(Image, copy=True)
+
+
+    # car(RGB as input)
+
+    white_px = np.asarray([0, 0, 255])
+
+    black_px = np.asarray([142, 0, 0])
+    print(Image.shape[0])
+
+
+    #road
+    white_px1 = np.asarray([255, 0, 0])
+
+    black_px1 = np.asarray([128, 64, 128])
+    print(Image.shape[0])
+
+    #sky
+    white_px2 = np.asarray([198, 145, 0])
+
+    black_px2 = np.asarray([180, 130, 70])
+    print(Image.shape[0])
+
+    #person
+    white_px3 = np.asarray([0, 255, 255])
+
+    black_px3 = np.asarray([60, 20,220])
+    print(Image.shape[0])
+
+    #vegetation
+    white_px4 = np.asarray([0, 255, 0])
+
+    black_px4 = np.asarray([35, 142, 107])
+    print(Image.shape[0])
+
+    #terrain
+    white_px5 = np.asarray([0, 100, 0])
+
+    black_px5 = np.asarray([152, 251, 152])
+    print(Image.shape[0])
+
+    #sidewalk
+    white_px6 = np.asarray([192, 158, 125])
+
+    black_px6 = np.asarray([232, 35, 244])
+    print(Image.shape[0])
+
+    #fence
+    white_px7 = np.asarray([192, 158, 125])
+
+    black_px7 = np.asarray([232, 35, 244])
+
+    #lamb
+    white_px8 = np.asarray([127, 85, 170])
+
+    black_px8 = np.asarray([153, 153, 153])
+
+    # #traffic light
+    # white_px9 = np.asarray([0, 0, 0])
+    #
+    # black_px9 = np.asarray([30, 170, 250])
+
+    # # #traffic sign
+    # white_px10 = np.asarray([255, 255, 0])
+    #
+    # black_px10 = np.asarray([0, 220, 220])
+    # #rider
+    # white_px11 = np.asarray([255, 0, 0])
+    #
+    # black_px11 = np.asarray([0, 0, 255])
+    #
+    #
+    #motorcycle
+    # white_px12 = np.asarray([30, 105, 212])
+    #
+    # black_px12 = np.asarray([230, 0, 0])
+    #
+    # #bicycle
+    # white_px13 = np.asarray([30, 105, 212])
+    #
+    # black_px13 = np.asarray([230, 0, 0])
+
+    # #building
+    # white_px14 = np.asarray([0, 0, 0])
+    #
+    # black_px14 = np.asarray([70, 70, 70])
+
+    # #wall
+    # white_px15 = np.asarray([190, 190, 190])
+    #
+    # black_px15 = np.asarray([156, 102, 102])
+
+
+
+    for r in range(0,Image.shape[0]):
+        for c in range(0,Image.shape[1]):
+            px = Image[r][c]
+            # 检测白色，然后替换为黑色
+            if all(px == white_px):
+                Image2[r][c] = black_px
+
+            elif all(px == white_px1):
+                            Image2[r][c] = black_px1
+
+            elif all(px == white_px2):
+                            Image2[r][c] = black_px2
+
+            elif all(px == white_px3):
+                            Image2[r][c] = black_px3
+            elif all(px == white_px4):
+                            Image2[r][c] = black_px4
+            elif all(px == white_px5):
+                             Image2[r][c] = black_px5
+            elif all(px == white_px6):
+                                Image2[r][c] = black_px6
+            elif all(px == white_px7):
+                                Image2[r][c] = black_px7
+            elif all(px == white_px8):
+                Image2[r][c] = black_px8
+            # # elif all(px == white_px9):
+            # #      Image2[r][c] = black_px=9
+            # elif all(px == white_px10):
+            #      Image2[r][c] = black_px=10
+            # elif all(px == white_px11):
+            #      Image2[r][c] = black_px=11
+            # if all(px == white_px12):
+            #     Image2[r][c] = black_px = 12
+            # if all(px == white_px13):
+            #      Image2[r][c] = black_px = 13
+            # elif all(px == white_px14):
+            #     Image2[r][c] = black_px = 14
+            # elif all(px == white_px15):
+            #              Image2[r][c] = black_px = 15
+
+
+
+
+    out_path=out_dir+i
+    cv2.imwrite(out_path,Image2)
